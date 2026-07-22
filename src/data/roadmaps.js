@@ -8,12 +8,12 @@ export const ROADMAPS = {
   pentest:{certPath:["CompTIA Security+","eJPT","OSCP","CRTO"],stages:[
     {level:"Beginner",color:"#0DFFE0",courses:[
       {id:"pt_b1",title:"Linux for Ethical Hackers — Kali Linux",duration:"4h 00m",ytId:"lZAoFs75_cs",lab:true,desc:"Master Kali Linux from scratch — terminal, filesystem, permissions, Bash scripting, and essential hacking tools."},
-      {id:"pt_b2",title:"Networking Full Course — TCP/IP, DNS, HTTP",duration:"9h 00m",ytId:"IPvYjXCsTg8",lab:true,desc:"Understand subnets, routing, protocols, and how data travels. Essential foundation for every pentester."},
+      {id:"pt_b2",title:"Networking Full Course — TCP/IP, DNS, HTTP",duration:"9h 00m",ytId:"IPvYjXCsTg8",lab:true,labLink:"https://tryhackme.com/learn",desc:"Understand subnets, routing, protocols, and how data travels. Essential foundation for every pentester."},
       {id:"pt_b3",title:"Ethical Hacking Full Course for Beginners",duration:"8h 00m",ytId:"fNzpcB7ODxQ",lab:false,desc:"The mindset, methodology, and legal framework of ethical hacking — from zero to first vulnerability."},
-      {id:"pt_b4",title:"Cybersecurity Full Course — Beginner to Advanced",duration:"5h 00m",ytId:"sroXbGCBnWQ",lab:true,desc:"Nmap, Metasploit, Wireshark, and Burp Suite — your essential pentesting toolkit explained clearly."},
+      {id:"pt_b4",title:"Cybersecurity Full Course — Beginner to Advanced",duration:"5h 00m",ytId:"sroXbGCBnWQ",lab:true,labLink:"https://portswigger.net/web-security",desc:"Nmap, Metasploit, Wireshark, and Burp Suite — your essential pentesting toolkit explained clearly."},
     ]},
     {level:"Intermediate",color:"#FFB547",courses:[
-      {id:"pt_i1",title:"Web Application Hacking Full Course",duration:"6h 00m",ytId:"sROKeoKBELc",lab:true,desc:"SQLi, XSS, IDOR, SSRF, CSRF — exploit every major web vulnerability with hands-on labs."},
+      {id:"pt_i1",title:"Web Application Hacking Full Course",duration:"6h 00m",ytId:"sROKeoKBELc",lab:true,labLink:"https://portswigger.net/web-security",desc:"SQLi, XSS, IDOR, SSRF, CSRF — exploit every major web vulnerability with hands-on labs."},
       {id:"pt_i2",title:"Network Penetration Testing",duration:"3h 00m",ytId:"pKtDptF5nnI",lab:true,desc:"Internal network recon, service exploitation, pivoting, and post-exploitation on real networks."},
       {id:"pt_i3",title:"Active Directory Security & Attacks",duration:"5h 00m",ytId:"pKtDptF5nnI",lab:true,desc:"BloodHound, Kerberoasting, pass-the-hash, DCSync — attacking and defending Active Directory."},
     ]},
@@ -27,7 +27,7 @@ export const ROADMAPS = {
     {level:"Beginner",color:"#0DFFE0",courses:[
       {id:"soc_b1",title:"SOC Analyst Full Course",duration:"5h 00m",ytId:"jMGUeW_ynAY",lab:false,desc:"How a Security Operations Center works, alert triage process, and your first day as a SOC analyst."},
       {id:"soc_b2",title:"Networking Full Course for Cybersecurity",duration:"9h 00m",ytId:"IPvYjXCsTg8",lab:true,desc:"Ports, protocols, Wireshark packet capture — everything needed to read and analyse security events."},
-      {id:"soc_b3",title:"Splunk Tutorial for Beginners",duration:"3h 00m",ytId:"SSoNLCf0Nvg",lab:true,desc:"Install Splunk, ingest logs, write SPL queries, build your first security monitoring dashboard."},
+      {id:"soc_b3",title:"Splunk Tutorial for Beginners",duration:"3h 00m",ytId:"SSoNLCf0Nvg",lab:true,labLink:"https://www.splunk.com/en_us/training.html",desc:"Install Splunk, ingest logs, write SPL queries, build your first security monitoring dashboard."},
     ]},
     {level:"Intermediate",color:"#FFB547",courses:[
       {id:"soc_i1",title:"MITRE ATT&CK Framework Full Course",duration:"2h 00m",ytId:"bkfWKSrjIlM",lab:true,desc:"Map detections to ATT&CK tactics, build a detection library, understand attacker behaviour."},
@@ -42,11 +42,11 @@ export const ROADMAPS = {
   fullstack_cs:{certPath:["Meta Front-End Cert","Meta Back-End Cert","AWS Developer Associate"],stages:[
     {level:"Beginner",color:"#6C63FF",courses:[
       {id:"fs_b1",title:"HTML & CSS Full Course — Zero to Hero",duration:"6h 00m",ytId:"G3e-cpL7ofc",lab:true,desc:"Build real websites from scratch. Layouts, Flexbox, Grid, responsive design, and modern CSS."},
-      {id:"fs_b2",title:"JavaScript Full Course for Beginners",duration:"8h 00m",ytId:"PkZNo7MFNFg",lab:true,desc:"Variables, DOM manipulation, events, fetch API, ES6+ — the complete JavaScript foundation."},
+      {id:"fs_b2",title:"JavaScript Full Course for Beginners",duration:"8h 00m",ytId:"PkZNo7MFNFg",lab:true,labLink:"https://replit.com/~",desc:"Variables, DOM manipulation, events, fetch API, ES6+ — the complete JavaScript foundation."},
       {id:"fs_b3",title:"Git & GitHub Full Course",duration:"1h 40m",ytId:"RGOj5yH7evk",lab:true,desc:"Version control, branching, pull requests, and open source collaboration workflows."},
     ]},
     {level:"Intermediate",color:"#FFB547",courses:[
-      {id:"fs_i1",title:"React.js Full Course 2024",duration:"9h 00m",ytId:"bMknfKXIFA8",lab:true,desc:"Components, hooks, state management, React Router, and consuming REST APIs in production."},
+      {id:"fs_i1",title:"React.js Full Course 2024",duration:"9h 00m",ytId:"bMknfKXIFA8",lab:true,labLink:"https://codesandbox.io/s/new",desc:"Components, hooks, state management, React Router, and consuming REST APIs in production."},
       {id:"fs_i2",title:"Node.js & Express Full Course",duration:"8h 00m",ytId:"Oe421EPjeBE",lab:true,desc:"REST APIs, middleware, JWT authentication, and PostgreSQL integration with Express."},
       {id:"fs_i3",title:"SQL & PostgreSQL Full Course",duration:"4h 00m",ytId:"qw--VYLpxG4",lab:true,desc:"Databases, JOINs, indexes, transactions, stored procedures, and query optimisation."},
     ]},
@@ -73,7 +73,7 @@ export const ROADMAPS = {
   ]},
   data_analyst:{certPath:["Google Data Analytics Cert","Power BI Cert","SQL Associate"],stages:[
     {level:"Beginner",color:"#FF6B6B",courses:[
-      {id:"da_b1",title:"Microsoft Excel Full Course for Data Analysis",duration:"3h 00m",ytId:"K74l26pE4YA",lab:true,desc:"Pivot tables, VLOOKUP, charts, and data cleaning — the analyst's everyday toolkit."},
+      {id:"da_b1",title:"Microsoft Excel Full Course for Data Analysis",duration:"3h 00m",ytId:"K74l26pE4YA",lab:true,labLink:"https://colab.research.google.com/",desc:"Pivot tables, VLOOKUP, charts, and data cleaning — the analyst's everyday toolkit."},
       {id:"da_b2",title:"SQL Full Course for Data Analysis",duration:"4h 00m",ytId:"HXV3zeQKqGY",lab:true,desc:"SELECT, GROUP BY, JOINs, subqueries, and window functions for real data analysis."},
       {id:"da_b3",title:"Python & Pandas for Data Analysis",duration:"5h 00m",ytId:"r-uOLxNrNk8",lab:true,desc:"Load, clean, transform, and summarise real-world datasets with Pandas and NumPy."},
     ]},
@@ -88,7 +88,7 @@ export const ROADMAPS = {
   ]},
   ml_eng:{certPath:["Google TF Developer","AWS ML Specialty","Deep Learning Specialization"],stages:[
     {level:"Beginner",color:"#A855F7",courses:[
-      {id:"ml_b1",title:"Python for Machine Learning Full Course",duration:"6h 00m",ytId:"rfscVS0vtbw",lab:true,desc:"NumPy, Pandas, Matplotlib, scikit-learn — the complete Python ML foundation."},
+      {id:"ml_b1",title:"Python for Machine Learning Full Course",duration:"6h 00m",ytId:"rfscVS0vtbw",lab:true,labLink:"https://colab.research.google.com/",desc:"NumPy, Pandas, Matplotlib, scikit-learn — the complete Python ML foundation."},
       {id:"ml_b2",title:"Statistics for Machine Learning Full Course",duration:"5h 00m",ytId:"xxpc-HPKN28",lab:false,desc:"Probability, linear algebra, and calculus — only the parts that actually matter for ML."},
       {id:"ml_b3",title:"Machine Learning Full Course for Beginners",duration:"9h 00m",ytId:"i_LwzRVP7bg",lab:true,desc:"Train, evaluate, and improve models. Linear regression, decision trees, and model selection."},
     ]},
@@ -104,7 +104,7 @@ export const ROADMAPS = {
   cloud_admin:{certPath:["AWS Cloud Practitioner","AWS SysOps Associate","AWS Solutions Architect"],stages:[
     {level:"Beginner",color:"#4ECDC4",courses:[
       {id:"ca_b1",title:"Cloud Computing Full Course for Beginners",duration:"5h 00m",ytId:"M988_fsOSWo",lab:false,desc:"IaaS, PaaS, SaaS, regions, availability zones — the complete vocabulary of cloud computing."},
-      {id:"ca_b2",title:"AWS Full Course 2024 — Zero to Hero",duration:"5h 00m",ytId:"3hLmDS179YE",lab:true,desc:"EC2, S3, VPC, IAM, RDS — hands-on labs covering every core AWS service."},
+      {id:"ca_b2",title:"AWS Full Course 2024 — Zero to Hero",duration:"5h 00m",ytId:"3hLmDS179YE",lab:true,labLink:"https://aws.amazon.com/free",desc:"EC2, S3, VPC, IAM, RDS — hands-on labs covering every core AWS service."},
       {id:"ca_b3",title:"Linux Full Course for Beginners",duration:"5h 00m",ytId:"sWbUDq4S6Y8",lab:true,desc:"Shell scripting, cron jobs, user management, and systemd — Linux fundamentals for cloud admins."},
     ]},
     {level:"Intermediate",color:"#FFB547",courses:[
@@ -112,14 +112,14 @@ export const ROADMAPS = {
       {id:"ca_i2",title:"Terraform Full Course — Infrastructure as Code",duration:"2h 30m",ytId:"SLB_c_mT-tA",lab:true,desc:"Provision and manage cloud infrastructure with Terraform. Modules and remote state management."},
     ]},
     {level:"Advanced",color:"#FF4D6D",courses:[
-      {id:"ca_a1",title:"Kubernetes Full Course",duration:"7h 00m",ytId:"X48VuDVv0do",lab:true,desc:"Deploy, scale, and manage containerised apps. Helm charts, RBAC, and persistent volumes."},
+      {id:"ca_a1",title:"Kubernetes Full Course",duration:"7h 00m",ytId:"X48VuDVv0do",lab:true,labLink:"https://labs.play-with-docker.com/",desc:"Deploy, scale, and manage containerised apps. Helm charts, RBAC, and persistent volumes."},
       {id:"ca_a2",title:"AWS Solutions Architect Exam Prep",duration:"5h 00m",ytId:"3hLmDS179YE",lab:true,desc:"Complete SAA-C03 exam preparation with architecture patterns and practice questions."},
     ]},
   ]},
   brand_mgr:{certPath:["Google Digital Marketing Cert","HubSpot Marketing Cert","CIM Diploma"],stages:[
     {level:"Beginner",color:"#F59E0B",courses:[
       {id:"bm_b1",title:"Brand Management Full Course",duration:"2h 00m",ytId:"cZeGXuEeJ0A",lab:false,desc:"What brand management is and how top global companies build brands that last for decades."},
-      {id:"bm_b2",title:"Digital Marketing Full Course for Beginners",duration:"7h 00m",ytId:"dBSSA5ot0tM",lab:true,desc:"SEO, SEM, email, social media, and content strategy — the complete digital marketing stack."},
+      {id:"bm_b2",title:"Digital Marketing Full Course for Beginners",duration:"7h 00m",ytId:"dBSSA5ot0tM",lab:true,labLink:"https://www.canva.com/",desc:"SEO, SEM, email, social media, and content strategy — the complete digital marketing stack."},
       {id:"bm_b3",title:"Consumer Behaviour & Marketing Psychology",duration:"2h 00m",ytId:"cZeGXuEeJ0A",lab:false,desc:"Why people buy and how to use psychology ethically in marketing and brand communications."},
     ]},
     {level:"Intermediate",color:"#FFB547",courses:[
@@ -198,7 +198,7 @@ export const ROADMAPS = {
       {id:"cn_b3",title:"Medical Terminology for Healthcare",duration:"2h 00m",ytId:"9LCBEhcFkUo",lab:false,desc:"Medical language — prefixes, suffixes, roots, and how to read clinical documentation."},
     ]},
     {level:"Intermediate",color:"#FFB547",courses:[
-      {id:"cn_i1",title:"Pharmacology for Nurses & Drug Calculations",duration:"3h 00m",ytId:"9LCBEhcFkUo",lab:true,desc:"Drug classes, mechanisms of action, nursing considerations, and safe dosage calculations."},
+      {id:"cn_i1",title:"Pharmacology for Nurses & Drug Calculations",duration:"3h 00m",ytId:"9LCBEhcFkUo",lab:true,labLink:"https://www.osmosis.org/",desc:"Drug classes, mechanisms of action, nursing considerations, and safe dosage calculations."},
       {id:"cn_i2",title:"Clinical Assessment & Patient Care",duration:"4h 00m",ytId:"9LCBEhcFkUo",lab:true,desc:"Head-to-toe assessment, vital signs interpretation, and evidence-based care planning."},
     ]},
     {level:"Advanced",color:"#FF4D6D",courses:[

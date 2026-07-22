@@ -4,6 +4,9 @@ import { SCHOOLS, ALL_DEPTS } from "./data/schools.js";
 import { ROADMAPS, defaultRoadmap } from "./data/roadmaps.js";
 import Dashboard    from "./components/Dashboard.jsx";
 import RoadmapPage  from "./pages/RoadmapPage.jsx";
+import LabPage      from "./pages/LabPage.jsx";
+import LabsListPage from "./pages/LabsListPage.jsx";
+import InstructorReview from "./pages/InstructorReview.jsx";
 
 /* ─── THEME ─────────────────────────────────────────────── */
 const T = {
@@ -397,6 +400,7 @@ function AppShell({ profile, onSignOut }) {
   const [view,            setView]            = useState("dashboard");
   const [completed,       setCompleted]       = useState({});
   const [quizScores,      setQuizScores]      = useState({});
+  const [labInfo,         setLabInfo]         = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(true);
   const [syncing,         setSyncing]         = useState(false);
   const [toast,           setToast]           = useState(null);
@@ -465,6 +469,7 @@ function AppShell({ profile, onSignOut }) {
     { key:"dashboard", label:"🏠 Home"     },
     { key:"roadmap",   label:"🗺️ Path"     },
     { key:"explore",   label:"🔭 Explore"  },
+    { key:"labs",      label:"🧪 Labs"     },
     { key:"profile",   label:"👤 Profile"  },
   ];
 
@@ -488,6 +493,9 @@ function AppShell({ profile, onSignOut }) {
             ? <div style={{ width:28,height:28,borderRadius:"50%",background:`${T.cyan}22`,border:`1px solid ${T.cyan}44`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:700,color:T.cyan }}>{profile.name?.charAt(0).toUpperCase()}</div>
             : <span style={{ fontSize:11,background:`${T.yellow}18`,color:T.yellow,border:`1px solid ${T.yellow}33`,borderRadius:6,padding:"3px 8px",fontWeight:700 }}>Guest</span>
           }
+          {profile?.role === 'instructor' && (
+            <button onClick={() => setView('instructor')} style={{ background:"none", border:`1px solid ${T.border}`, borderRadius:8, color:T.muted, padding:"5px 10px", fontSize:11, cursor:"pointer" }}>Instructor</button>
+          )}
           <button onClick={handleSignOut} style={{ background:"none",border:`1px solid ${T.border}`,borderRadius:8,color:T.muted,padding:"5px 10px",fontSize:11,cursor:"pointer" }}>{session?"Sign out":"Exit"}</button>
         </div>
       </div>
@@ -526,9 +534,14 @@ function AppShell({ profile, onSignOut }) {
             syncing={syncing}
             onToggle={handleToggle}
             onQuizComplete={handleQuizComplete}
+            onOpenLab={(course) => { setLabInfo(course); setView('lab'); }}
           />
         )}
+        {!loadingProgress && view==="lab" && (
+          <LabPage lab={labInfo} profile={profile} onBack={() => setView('roadmap')} />
+        )}
         {!loadingProgress && view==="explore" && <ExplorePage/>}
+        {!loadingProgress && view==="labs" && <LabsListPage onClose={() => setView('dashboard')} />}
         {!loadingProgress && view==="profile" && (
           <ProfilePage
             profile={profile}
@@ -539,6 +552,7 @@ function AppShell({ profile, onSignOut }) {
             quizScores={quizScores}
           />
         )}
+        {!loadingProgress && view==="instructor" && <InstructorReview />}
       </div>
     </div>
   );

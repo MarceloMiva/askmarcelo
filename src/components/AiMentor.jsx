@@ -152,6 +152,7 @@ export default function AiMentor({ profile, course, completedCourses = [], onClo
   const [cvText,    setCvText]    = useState("");
   const [cvLoading, setCvLoading] = useState(false);
   const bottomRef = useRef(null);
+  const inputRef = useRef(null);
 
   const completedTitles = completedCourses.map(c => c.title);
   const firstName = profile?.name?.split(" ")[0] || "Student";
@@ -162,12 +163,18 @@ export default function AiMentor({ profile, course, completedCourses = [], onClo
       role: "assistant",
       content: `Hey ${firstName}! 👋 I'm Marcelo, your AI mentor.\n\nWe're studying **${course?.title}** right now.\n\nUse the quick actions below to get started — I can explain concepts, quiz you, give you an assignment, help with interview prep, or review your code.\n\nOr just type your question!`,
     }]);
+    // autofocus input when mentor opens
+    setTimeout(()=>{ try{ inputRef.current?.focus(); }catch(e){} }, 120);
   }, [course?.id]);
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior:"smooth" }); }, [messages]);
 
+  useEffect(() => {
+    if (activeTab === 'chat') inputRef.current?.focus();
+  }, [activeTab]);
+
   async function send(content) {
-    const text = content || input.trim();
+    const text = (content || input || "").trim();
     if (!text || loading) return;
     setInput("");
     const newMessages = [...messages, { role:"user", content:text }];
@@ -175,7 +182,10 @@ export default function AiMentor({ profile, course, completedCourses = [], onClo
     setLoading(true);
     try {
       const reply = await tutorChat(profile, course, newMessages, completedTitles);
+      // append assistant reply in one update to avoid race with other UI
       setMessages(m => [...m, { role:"assistant", content:reply }]);
+      // scroll to bottom after assistant reply
+      setTimeout(()=>bottomRef.current?.scrollIntoView({ behavior:'smooth' }), 80);
     } catch (err) {
       setMessages(m => [...m, { role:"assistant", content:`Sorry, I couldn't connect. Check your internet and try again.\n\n_${err.message}_` }]);
     }
@@ -242,6 +252,14 @@ export default function AiMentor({ profile, course, completedCourses = [], onClo
     }
     setLoading(false);
   }
+
+  // If opened with autoLab flag, immediately request an assignment
+  useEffect(() => {
+    if (course?.autoLab) {
+      handleQuickAction("assignment");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [course?.id]);
 
   function copyToClipboard(text) {
     navigator.clipboard?.writeText(text).catch(() => {});

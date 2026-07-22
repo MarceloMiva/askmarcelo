@@ -12,7 +12,7 @@ function Spinner({ color = T.cyan }) {
   return <div style={{ width:16,height:16,border:`2px solid ${color}33`,borderTop:`2px solid ${color}`,borderRadius:"50%",animation:"spin .8s linear infinite" }}/>;
 }
 
-export default function RoadmapPage({ profile, roadmap, completed, quizScores, deptColor, syncing, onToggle, onQuizComplete }) {
+export default function RoadmapPage({ profile, roadmap, completed, quizScores, deptColor, syncing, onToggle, onQuizComplete, onOpenLab }) {
   const [activeVideo,  setActiveVideo]  = useState(null);
   const [activeMentor, setActiveMentor] = useState(null);
   const [browseMode,   setBrowseMode]   = useState(false);
@@ -23,7 +23,7 @@ export default function RoadmapPage({ profile, roadmap, completed, quizScores, d
 
   return (
     <div style={{ animation:"slideUp .25s ease" }}>
-      {activeVideo  && <VideoModal course={activeVideo} color={deptColor} onClose={() => setActiveVideo(null)}/>}
+      {activeVideo  && <VideoModal course={activeVideo} color={deptColor} onClose={() => setActiveVideo(null)} onOpenLab={(c) => { setActiveVideo(null); onOpenLab?.(c); }} />}
       {activeMentor && (
         <AiMentor
           profile={profile}
@@ -112,6 +112,11 @@ export default function RoadmapPage({ profile, roadmap, completed, quizScores, d
                       <div style={{ display:"flex", flexDirection:"column", gap:6, flexShrink:0 }}>
                         <button onClick={() => !locked && setActiveVideo(course)} disabled={locked} style={{ padding:"7px 12px", borderRadius:8, border:"none", background:locked?T.border:stage.color, color:locked?T.muted:T.bg, fontWeight:700, fontSize:11, cursor:locked?"not-allowed":"pointer", whiteSpace:"nowrap" }}>▶ Watch</button>
                         <button onClick={() => !locked && setActiveMentor(course)} disabled={locked} style={{ padding:"7px 12px", borderRadius:8, border:`1px solid ${locked?T.border:T.cyan+"66"}`, background:"transparent", color:locked?T.muted:T.cyan, fontWeight:700, fontSize:11, cursor:locked?"not-allowed":"pointer", whiteSpace:"nowrap" }}>🤖 Mentor</button>
+                        {course.lab && <button onClick={() => {
+                            if (locked) return;
+                            if (course.labLink) { window.open(course.labLink, '_blank', 'noopener'); }
+                            else { onOpenLab?.(course); }
+                          }} disabled={locked} style={{ padding:"7px 12px", borderRadius:8, border:`1px solid ${T.violet}44`, background:`${T.violet}12`, color:T.violet, fontWeight:700, fontSize:11, cursor:locked?"not-allowed":"pointer", whiteSpace:"nowrap" }}>🧪 Lab</button>}
                         <button onClick={() => !locked && onToggle(course.id, !done)} disabled={locked} style={{ padding:"7px 12px", borderRadius:8, border:`1px solid ${done?stage.color+"66":T.border}`, background:done?`${stage.color}18`:"transparent", color:done?stage.color:T.muted, fontWeight:700, fontSize:11, cursor:locked?"not-allowed":"pointer", whiteSpace:"nowrap" }}>{done?"✓ Done":"Mark Done"}</button>
                       </div>
                     </div>
@@ -147,6 +152,7 @@ export default function RoadmapPage({ profile, roadmap, completed, quizScores, d
                 <div style={{ display:"flex", gap:5 }}>
                   <button onClick={() => setActiveVideo(course)} style={{ padding:"6px 10px", borderRadius:7, border:"none", background:stage.color, color:T.bg, fontWeight:700, fontSize:10, cursor:"pointer" }}>▶</button>
                   <button onClick={() => setActiveMentor(course)} style={{ padding:"6px 10px", borderRadius:7, border:`1px solid ${T.cyan}44`, background:"transparent", color:T.cyan, fontWeight:700, fontSize:10, cursor:"pointer" }}>🤖</button>
+                  {course.lab && <button onClick={() => { if (course.labLink) { window.open(course.labLink, '_blank', 'noopener'); } else { onOpenLab?.(course); } }} style={{ padding:"6px 10px", borderRadius:7, border:`1px solid ${T.violet}44`, background:`${T.violet}12`, color:T.violet, fontWeight:700, fontSize:10, cursor:"pointer" }}>🧪</button>}
                   <button onClick={() => onToggle(course.id, !done)} style={{ padding:"6px 10px", borderRadius:7, border:`1px solid ${done?stage.color+"66":T.border}`, background:done?`${stage.color}18`:"transparent", color:done?stage.color:T.muted, fontWeight:700, fontSize:10, cursor:"pointer" }}>{done?"✓":"○"}</button>
                 </div>
               </div>

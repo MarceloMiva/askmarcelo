@@ -55,6 +55,22 @@ export const sb = {
     if (!Array.isArray(rows)) return {};
     return rows.reduce((acc, row) => ({ ...acc, [row.course_id]: { score:row.score, total:row.total } }), {});
   },
+  async saveLabSubmission(token, userId, labId, payload) {
+    // payload: { code?, output?, grade?, metadata? }
+    await fetch(`${SUPABASE_URL}/rest/v1/lab_submissions`, { method:"POST", headers:{ ...h(token), "Prefer":"resolution=merge-duplicates" }, body:JSON.stringify({ user_id:userId, lab_id:labId, payload, submitted_at: new Date().toISOString() }) });
+  },
+  async getLabSubmissions(token, userId, labId) {
+    try {
+      const params = [];
+      if (userId) params.push(`user_id=eq.${userId}`);
+      if (labId) params.push(`lab_id=eq.${labId}`);
+      params.push('select=*');
+      const url = `${SUPABASE_URL}/rest/v1/lab_submissions?` + params.join('&');
+      const r = await fetch(url, { headers:h(token) });
+      const rows = await r.json();
+      return Array.isArray(rows) ? rows : [];
+    } catch (e) { return []; }
+  },
 };
 
 // ── Session helpers ──────────────────────────────────────────
