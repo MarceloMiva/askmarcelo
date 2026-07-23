@@ -4,25 +4,47 @@
 
 const PROXY = "/api/tutor";
 
+function buildFallbackReply(system, messages) {
+  const lastUser = [...messages].reverse().find(m => m.role === "user")?.content || "";
+  const lessonMatch = /CURRENT LESSON: "([^"]+)"/.exec(system || "");
+  const lessonTitle = lessonMatch?.[1] || "this lesson";
+  const topic = lastUser.trim() || `your ${lessonTitle} lesson`;
+
+  return `I’m in offline mode right now, but here’s a helpful starting point for ${topic}:
+
+1. Break the idea into one simple definition.
+2. Give one real-world example you can relate to.
+3. Practice one small task or question to test yourself.
+
+If you want, I can still help you with a quick explanation, a quiz, or an assignment for ${lessonTitle}.`;
+}
+
 async function callClaude(system, messages, maxTokens = 800) {
-  const res = await fetch(PROXY, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: maxTokens,
-      system,
-      messages,
-    }),
-  });
+  try {
+    const res = await fetch(PROXY, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: maxTokens,
+        system,
+        messages,
+      }),
+    });
 
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.error?.message || `API error ${res.status}`);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      if (res.status >= 500 || res.status === 404) {
+        return buildFallbackReply(system, messages);
+      }
+      throw new Error(err.error?.message || `API error ${res.status}`);
+    }
+
+    const data = await res.json();
+    return data.content?.find(b => b.type === "text")?.text || buildFallbackReply(system, messages);
+  } catch {
+    return buildFallbackReply(system, messages);
   }
-
-  const data = await res.json();
-  return data.content?.find(b => b.type === "text")?.text || "";
 }
 
 // ── Build tutor system prompt ────────────────────────────────
